@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-boathouse-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: hello-boathouse
+  template:
+    metadata:
+      labels:
+        app: hello-boathouse
+    spec:
+      containers:
+      - name: hello-boathouse
+        image: registry.cn-shenzhen.aliyuncs.com/devops-plus/hello-boathouse:v2
+        tty: true 
+        stdin: true 
+        ports:
+        - name: nodejs-port
+          containerPort: 3000

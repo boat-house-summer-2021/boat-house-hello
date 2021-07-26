@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-boathouse-pod
+  labels:
+    app: hello-boathouse
+spec:
+  containers:
+  - name: hello-boathouse
+    image: registry.cn-shenzhen.aliyuncs.com/devops-plus/hello-boathouse
+    tty: true 
+    stdin: true 
+    ports:
+    - name: nodejs-port
+      containerPort: 3000
