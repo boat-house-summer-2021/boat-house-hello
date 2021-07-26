@@ -1,0 +1,6 @@
+version: "2.1"
+services:
+    web:
+        image: #{REGISTRY_URL}#/#{REGISTRY_NS}#/boat-house-hello:latest
+        ports:
+            - "3001:3000"
