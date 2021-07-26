@@ -28,7 +28,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -f Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boat-house-hello:latest .'
+                sh 'docker build -f ../Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boat-house-hello:latest .'
             }
         }
 

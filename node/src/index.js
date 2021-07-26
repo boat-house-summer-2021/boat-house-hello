@@ -7,8 +7,7 @@ var app = express();
 app.get('/', function (req, res) {
   //  - upgrade to v2 in feature1
   console.log('Hello Boathouse v3 from ... %s', os.hostname );
-  res.send('Hello Boathouse v3 from--feature01--002-- ... '+ os.hostname);  
-  //feature01 ....
+  res.send('Hello Boathouse v3 ... '+ os.hostname);  
 });
 
 var server = app.listen(3000, function () {
