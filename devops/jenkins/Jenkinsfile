@@ -28,7 +28,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -f ../Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boat-house-hello:latest .'
+                sh 'docker build -f src/${BRANCH_NAME}/Dockerfile -t ${REGISTRY_URL}/${REGISTRY_NS}/boat-house-hello:latest .'
             }
         }
 
@@ -61,13 +61,13 @@ pipeline {
                 
                 echo "stopping previous docker containers..."       
                 sshCommand remote: server, command: "docker login ${REGISTRY_URL} -u ${REGISTRY_USER} -p ${REGISTRY_PWD}"
-                sshCommand remote: server, command: "docker-compose -f docker-compose-template.yaml -p boat-house-hello down"
+                sshCommand remote: server, command: "docker-compose -f src/docker-compose-template.yaml -p boat-house-hello down"
                 
                 echo "pulling newest docker images..."
-                sshCommand remote: server, command: "docker-compose -f docker-compose-template.yaml -p boat-house-hello pull"
+                sshCommand remote: server, command: "docker-compose -f src/docker-compose-template.yaml -p boat-house-hello pull"
                 
                 echo "restarting new docker containers..."
-                sshCommand remote: server, command: "docker-compose -f docker-compose-template.yaml -p boat-house-hello up -d"
+                sshCommand remote: server, command: "docker-compose -f src/docker-compose-template.yaml -p boat-house-hello up -d"
                 
                 echo "successfully started!...http://${DEVOPSBOX_HOST_IP}:3001"
               }
