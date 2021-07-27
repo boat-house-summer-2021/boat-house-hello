@@ -53,13 +53,14 @@ pipeline {
         // dev 环境
         stage('deploy-dev') { 
             steps {
-              sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' src/docker-compose-template.yaml"
-              sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' src/docker-compose-template.yaml"
+              sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' src/${BRANCH_NAME}/docker-compose-template.yaml"
+              sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' src/${BRANCH_NAME}/docker-compose-template.yaml"
               script {
                 server = getHost()
                 echo "copy docker-compose file to remote server..."       
                 sshRemove remote: server, path: "./docker-compose-template.yaml"   // 先删除远程服务器上的文件，已确保是最新的文件
-                sshPut remote: server, from: './docker-compose-template.yaml', into: '.'
+               
+                sshPut remote: server, from: 'src/'+"${BRANCH_NAME}"+'/docker-compose-template.yaml', into: '.'
                 
                 echo "stopping previous docker containers..."       
                 sshCommand remote: server, command: "docker login ${REGISTRY_URL} -u ${REGISTRY_USER} -p ${REGISTRY_PWD}"
