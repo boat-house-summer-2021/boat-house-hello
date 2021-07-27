@@ -53,8 +53,8 @@ pipeline {
         // dev 环境
         stage('deploy-dev') { 
             steps {
-              sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' docker-compose-template.yaml"
-              sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' docker-compose-template.yaml"
+              sh "sed -i 's/#{REGISTRY_URL}#/${REGISTRY_URL}/g' src/docker-compose-template.yaml"
+              sh "sed -i 's/#{REGISTRY_NS}#/${REGISTRY_NS}/g' src/docker-compose-template.yaml"
               script {
                 server = getHost()
                 echo "copy docker-compose file to remote server..."       
