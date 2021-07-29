@@ -1,0 +1,17 @@
+# 在src同级目录下执行如下命令：
+# docker build -f src/node/Dockerfile.image -t boat-house-hello  .
+
+FROM node:12-slim
+
+WORKDIR /app
+
+COPY src/node/package*.json ./
+
+# 使用淘宝镜像
+RUN npm --registry https://registry.npm.taobao.org install  
+
+COPY src/node/ .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

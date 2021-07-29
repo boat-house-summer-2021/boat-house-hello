@@ -1,3 +1,6 @@
+# 在src/node下执行如下命令：
+# docker build -f Dockerfile -t boat-house-hello  .
+
 FROM node:12-slim
 
 WORKDIR /app
