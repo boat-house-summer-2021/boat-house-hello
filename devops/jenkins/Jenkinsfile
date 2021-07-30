@@ -78,6 +78,8 @@ pipeline {
         }        
 
         // 测试环境部署
+        //kubectl create namespace boat-house-test
+        //kubectl create secret docker-registry regcred --docker-server=[docker registry url] --docker-username=[username] --docker-password=[password] --docker-email=info@idcf.io -n boat-house-test
         stage('CD - K8S TEST') {
             steps {
                 timeout(5) {
@@ -91,6 +93,8 @@ pipeline {
         }
 
         // 生产环境部署
+        //kubectl create namespace boat-house-prod
+        //kubectl create secret docker-registry regcred --docker-server=[docker registry url] --docker-username=[username] --docker-password=[password] --docker-email=info@idcf.io -n boat-house-prod
         stage('CD - K8S Prod') {
             steps {
                 timeout(5) {
